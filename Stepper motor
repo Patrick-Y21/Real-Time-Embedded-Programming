@@ -1,0 +1,73 @@
+// Description: Stepper motor experiment
+
+#include <stdio.h>
+#include <wiringPi.h>
+
+const int makerobo_motorPin[] = {1, 4, 5, 6}; // Define stepper motor pins
+int makerobo_rolePerMinute = 15; // Rotations per minute (RPM)
+int makerobo_stepsPerRevolution = 2048; // Steps per full revolution
+int makerobo_stepSpeed = 0;
+
+// Stepper motor rotation function
+void makerobo_rotary(char direction) {
+    if (direction == 'c') { // Clockwise rotation
+        for (int j = 0; j < 4; j++) {                
+            for (int i = 0; i < 4; i++) {        
+                digitalWrite(makerobo_motorPin[i], 0x99 >> j & (0x08 >> i));
+            }
+            delayMicroseconds(makerobo_stepSpeed);
+        }                        
+    } else if (direction == 'a') { // Counterclockwise rotation
+        for (int j = 0; j < 4; j++) {
+            for (int i = 0; i < 4; i++) {
+                digitalWrite(makerobo_motorPin[i], 0x99 << j & (0x80 >> i));
+            }
+            delayMicroseconds(makerobo_stepSpeed);
+        }
+    }
+}
+
+// Loop function
+void makerobo_loop() {
+    char makerobo_direction = '0';
+
+    while (1) {
+        printf("Makerobo: Select motor direction (a = counterclockwise, c = clockwise): ");
+        makerobo_direction = getchar();
+
+        if (makerobo_direction == 'c') {
+            printf("Makerobo: Motor running clockwise\n");
+            break;
+        } else if (makerobo_direction == 'a') {
+            printf("Makerobo: Motor running counterclockwise\n");
+            break;
+        } else {
+            printf("Makerobo: Input error, please try again!\n"); // Invalid input, prompt user again
+        }
+    }
+
+    while (1) {
+        makerobo_rotary(makerobo_direction); // Rotate the stepper motor
+    }
+}
+
+// Main function
+int main(void) {
+    // Initialize wiringPi, print error message if setup fails
+    if (wiringPiSetup() == -1) {
+        printf("Setup wiringPi failed!\n");
+        return 0;
+    }    
+
+    for (int i = 0; i < 4; i++) {
+        pinMode(makerobo_motorPin[i], OUTPUT);
+    }
+
+    // Calculate stepper motor speed
+    makerobo_stepSpeed = (600000000 / makerobo_rolePerMinute) / makerobo_stepsPerRevolution;
+    
+    // Start loop function
+    makerobo_loop(); 
+
+    return 0;
+}
