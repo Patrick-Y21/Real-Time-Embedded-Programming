@@ -4,6 +4,7 @@ Photosensitive AO DO DO output output---23 vcc 5v
 Temperature and humidity bus----17 vcc 5v
 Buzzer level pin 18
 Stepper motor IN1–IN4 connects to 27 22 24 25
+
 2.Step
 Start Bluetooth scanning, Bluetooth debugging assistant link
 sudo rfcomm watch hci0
@@ -11,6 +12,7 @@ After the connection is completed, use the command to compile and execute
 g++ -std=c++17 -o test /home/pi/main.cpp Delay.cpp DHT11.cpp Key.cpp BYJ.cpp -lgpiodcxx // (already compiled, you can ignore and execute test directly)
 ./test //Execute command
 The callback interface can be seen in the execution window to update the temperature and humidity, status value [callback style output]
+
 3.Control
 From top to bottom, from left to right, there are eight buttons in total
 1-Manual mode
