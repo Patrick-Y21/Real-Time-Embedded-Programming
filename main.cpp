@@ -2,6 +2,7 @@
 #include "/home/pi/DHT11.h"
 #include "/home/pi/Key.h"
 #include <ctime>
+
 #include <thread>
 #include <atomic>
 #include <fcntl.h>
@@ -14,6 +15,18 @@
 using StateCallback = std::function<void(int)>; 
 using SensorCallback = std::function<void(int, int)>; 
 
+const std::vector<std::vector<int>> steps = {
+    {1, 0, 0, 0},  
+    {1, 1, 0, 0},  
+    {0, 1, 0, 0},  
+    {0, 1, 1, 0},  
+    {0, 0, 1, 0}, 
+    {0, 0, 1, 1},  
+    {0, 0, 0, 1},  
+    {1, 0, 0, 1}   
+};
+
+const std::vector<unsigned int> outputPins = {27, 22, 24, 25};
 
 class CallbackManager {
 public:
@@ -66,7 +79,7 @@ void receiverThread(int fd) {
 				state = 0;
 			}
 			callbackManager.notifyStateChanged(state);
-            //std::cout << "state: " << state << std::endl;
+            //std::cout << "blue state: " << state << std::endl;
             
         }
         usleep(10000); // 10ms
@@ -86,6 +99,15 @@ int main()
 	DO_sesor.request({"DO_sesor", gpiod::line_request::DIRECTION_INPUT});
 	init_gpio(chip);
 	
+	auto lines = chip.get_lines(outputPins);
+        gpiod::line_request config;
+        config.consumer = "stepper";
+        config.request_type = gpiod::line_request::DIRECTION_OUTPUT;
+        
+        lines.request(config);
+        lines.set_values({1, 0, 0, 0});
+		delay_ms(1);        
+
 	int fd = open("/dev/rfcomm0", O_RDWR | O_NOCTTY | O_NONBLOCK);
     if (fd < 0) {
         std::cerr << "" << std::endl;
@@ -149,14 +171,7 @@ int main()
 		{
 			flag_dht = 1;
 		}
-		if(tem>27)
-		{
-			beep.set_value(1);
-		}
-		else
-		{
-			beep.set_value(0);
-		}
+		
 		
 		key = Key_scan();
 		//std::cout << "KEY" << key[0] << key[1] << std::endl;
@@ -170,27 +185,66 @@ int main()
 		{
 			state = 0;
 			std::cout << "manual mode Close" << std::endl;
+			for (int i = 0; i < 512; ++i) { 
+                int step_idx = i % 8;
+                lines.set_values(steps[step_idx]);
+                delay_ms(1);
+			}
 			key[0] = 0;
 			key[1] = 0;
 		}
 		else if(key[0] == 1 && key[1] == 3)
 		{
-			state = 1;
+			
 			std::cout << "manual mode Open" << std::endl;
+			for (int i = 0; i < 512; ++i) {
+                int step_idx = 7 - (i % 8);
+                lines.set_values(steps[step_idx]);
+                delay_ms(1);
+			}
 			key[0] = 0;
 			key[1] = 0;
 		}
 		else if(key[0] == 1 && key[1] == 4)
 		{
 			std::cout << "auto mode" << std::endl;
-			if(tem>20 && hum>40)
+			if(tem>27)
 			{
-				std::cout << "auto mode Open" << std::endl;
+				for (int i = 0; i < 512; ++i) { 
+                int step_idx = i % 8;
+                
+                lines.set_values(steps[step_idx]);
+                delay_ms(1);
+				}
+				if(state == 1)
+				{
+					beep.set_value(1);
+				}
+				
+				std::cout << "Temperature high close" << std::endl;
+				
 			}
+		else
+			{
+				beep.set_value(0);
+			}
+			if(DO_sesor.get_value() ){
+				for (int i = 0; i < 512; ++i) {
+                int step_idx = 7 - (i % 8);
+                lines.set_values(steps[step_idx]);
+                std::cout << "light open" << std::endl;
+			}
+		}
 			else
 			{
-				std::cout << "auto mode Close" << std::endl;
+				for (int i = 0; i < 512; ++i) { 
+                int step_idx = i % 8;
+                lines.set_values(steps[step_idx]);
+                delay_ms(1);
+                std::cout << "lignt close" << std::endl;
+				}
 			}
+			delay_s(1);
 		}
 		if(key[0] == 2 && key[1] == 1)
 		{
@@ -216,17 +270,35 @@ int main()
 		}
 		if(((clock_hour+clock_hour_half/60)%24 == local_time->tm_hour) && (clock_hour_half == local_time->tm_min) && flag_clock)
 		{
+			for (int i = 0; i < 512; ++i) { 
+                int step_idx = i % 8;
+                
+                lines.set_values(steps[step_idx]);
+                delay_ms(1);
+            }
+
 			beep.set_value(1);
+
 			clock_hour = 0;
 			clock_hour_half = 0;
 			flag_clock = 0;
+			std::cout << "clock close" << std::endl;
 		}
+		
 		if(key[0] == 2 && key[1] == 4)
 		{
 			beep.set_value(0);
-			key[0] = 0;
-			key[1] = 0;
+
 		}
+		if (state == 0)
+		{
+			beep.set_value(0);
+		}
+		else
+		{
+			beep.set_value(1);
+		}
+		
 		//std::cout << "clock" << (clock_hour+clock_hour_half/60)%24 << ":" << clock_hour_half%60 << std::endl;
  	}
  	
