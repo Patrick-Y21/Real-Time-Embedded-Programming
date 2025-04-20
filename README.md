@@ -46,3 +46,12 @@ In addition, the temperature is too high and the buzzer is on. Bluetooth sends 0
 
 
 Here's a link to our presentation and promotional video:  https://youtu.be/zzqQ1Vp2ANM
+![1745175979635](https://github.com/user-attachments/assets/77649bca-f610-4e7a-a673-a43ac6213d58)
+![1745175943880](https://github.com/user-attachments/assets/57872223-252a-43fc-bc87-5ea963f2a128)
+![1745175830348](https://github.com/user-attachments/assets/c8e1efec-e4dd-49ef-a84f-3c88dbc6db82)
+![1745175799089](https://github.com/user-attachments/assets/bafa43f0-10bc-4673-9af9-85b5fe0df92b)
+![1745175684636](https://github.com/user-attachments/assets/92075178-1eab-4748-bea0-cd02e0954bdf)
+
+
+
+
