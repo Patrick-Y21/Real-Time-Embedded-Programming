@@ -18,7 +18,7 @@ sudo rfcomm watch hci0
 
 After the connection is completed, use the command to compile and execute
 
-g++ -std=c++17 -o test /home/pi/main.cpp Delay.cpp DHT11.cpp Key.cpp BYJ.cpp -lgpiodcxx // (already compiled, you can ignore and execute test directly)
+g++ -std=c++17 -o test /home/pi/main.cpp Delay.cpp DHT11.cpp Key.cpp  -lgpiodcxx // (already compiled, you can ignore and execute test directly)
 
 ./test //Execute command
 
