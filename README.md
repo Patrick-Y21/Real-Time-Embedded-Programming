@@ -43,3 +43,6 @@ From top to bottom, from left to right, there are eight buttons in total
 8-Buzzer off
 
 In addition, the temperature is too high and the buzzer is on. Bluetooth sends 0 off, 1 on (hex)
+
+
+Here's a link to our presentation and promotional video:  https://youtu.be/zzqQ1Vp2ANM
