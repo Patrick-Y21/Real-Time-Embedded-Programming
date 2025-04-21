@@ -125,14 +125,38 @@ Huatai Yu
 a. Responsible for the overall division of labor of the project.
 b. Code writing for Bluetooth part and delay part.
 c. Cmake callback part and source code upload.
+d. Pay attention to the emergence of various problems and actively seek solutions.
 
 Shuo Sun
 ·Student Number：2962190S
 ·Contribution:
 a. Smart curtain overall architecture design.
-b. Code writing for Bluetooth part and delay part.
-c. Cmake callback part and source code upload.
+b. Lead the hardware solution design and make selection suggestions.
+c. Provide suggestions for later expansion, such as adding stepper motors.
 
+Yihao Yang
+·Student Number：2961277Y
+·Contribution:
+a. Responsible for component selection and procurement.
+b. Design schematics and wiring diagrams and be responsible for GPIO pin planning.
+c. Writing the code for the temperature and humidity sensor and the matrix keyboard.
+d. Writing Comment Code.
+
+Pengyu Wan
+·Student Number：2960904W
+·Contribution:
+a. Main part of the code writing.
+b. CMake build configuration script code writing.
+c. Assist team members to write and integrate all codes.
+
+Haoqing Li
+·Student Number：2996440L
+·Contribution:
+a. Test part code writing.
+b. Responsible for hardware and software testing and recording issues.
+c. Responsible for subsequent video recording and promotion explanation.
+
+---
 
 ![1745175979635](https://github.com/user-attachments/assets/77649bca-f610-4e7a-a673-a43ac6213d58)
 ![1745175943880](https://github.com/user-attachments/assets/57872223-252a-43fc-bc87-5ea963f2a128)
