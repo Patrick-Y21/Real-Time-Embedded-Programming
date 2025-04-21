@@ -122,9 +122,16 @@ Team Contributions
 Huatai Yu
 ·Student Number：2960703Y
 ·Contribution:
-a.Responsible for the overall division of labor of the project.
-b.
-c.
+a. Responsible for the overall division of labor of the project.
+b. Code writing for Bluetooth part and delay part.
+c. Cmake callback part and source code upload.
+
+Shuo Sun
+·Student Number：2962190S
+·Contribution:
+a. Smart curtain overall architecture design.
+b. Code writing for Bluetooth part and delay part.
+c. Cmake callback part and source code upload.
 
 
 ![1745175979635](https://github.com/user-attachments/assets/77649bca-f610-4e7a-a673-a43ac6213d58)
