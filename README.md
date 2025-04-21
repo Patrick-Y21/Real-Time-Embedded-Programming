@@ -117,7 +117,14 @@ if (tem > 27)
 | `blueth.cpp` | Bluetooth input handling (optional)|
 
 ---
+Team Contributions
 
+Huatai Yu
+·Student Number：2960703Y
+·Contribution:
+a.Responsible for the overall division of labor of the project.
+b.
+c.
 
 
 ![1745175979635](https://github.com/user-attachments/assets/77649bca-f610-4e7a-a673-a43ac6213d58)
