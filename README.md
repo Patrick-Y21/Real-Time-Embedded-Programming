@@ -148,6 +148,7 @@ Pengyu Wan
 a. Main part of the code writing.
 b. CMake build configuration script code writing.
 c. Assist team members to write and integrate all codes.
+d. Code writing for stepper motor test part.
 
 Haoqing Li
 ·Student Number：2996440L
