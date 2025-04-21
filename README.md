@@ -1,51 +1,125 @@
-1.Writting
+Smart Curtain Control System (Raspberry Pi)
 
-Matrix keyboard R1 - 4 connects to 21 20 16 12 C1 - 4 connects to 26 19 13 6 (see Key.cpp)
+This is a multi-functional smart curtain control project based on Raspberry Pi. It supports Bluetooth control, environmental sensing, scheduled control, and manual interaction. Hardware includes a stepper motor, buzzer, temperature & humidity sensor, light sensor, and matrix keypad to realize a full-featured automatic curtain system.
 
-Photosensitive AO DO DO output output---23 vcc 5v
 
-Temperature and humidity bus----17 vcc 5v
 
-Buzzer level pin 18
+ 📷 Demo Video
 
-Stepper motor IN1–IN4 connects to 27 22 24 25
+ [https://youtu.be/zzqQ1Vp2ANM](https://youtu.be/zzqQ1Vp2ANM)
 
-2.Step
+---
+ 1. Wiring Instructions
 
-Start Bluetooth scanning, Bluetooth debugging assistant link
+- **Matrix Keypad**
+  - Rows R1~R4 → GPIO 21, 20, 16, 12  
+  - Columns C1~C4 → GPIO 26, 19, 13, 6  
+  - See `Key.cpp`
 
+- **Light Sensor**
+  - AO: unused  
+  - DO → GPIO 23  
+  - VCC → 5V
+
+- **DHT11 Temp/Humidity Sensor**
+  - DATA → GPIO 17  
+  - VCC → 5V
+
+- **Buzzer**
+  - Signal pin → GPIO 18
+
+- **Stepper Motor (28BYJ-48 + ULN2003)**
+  - IN1~IN4 → GPIO 27, 22, 24, 25
+
+---
+
+ 2. Operation Steps
+
+ Start Bluetooth Monitoring
+
+Use a Bluetooth debug tool or mobile terminal to connect. Then run:
+
+```bash
 sudo rfcomm watch hci0
+```
 
-After the connection is completed, use the command to compile and execute
+After successful connection, proceed to compile and run the code.
 
-g++ -std=c++17 -o test /home/pi/main.cpp Delay.cpp DHT11.cpp Key.cpp  -lgpiodcxx // (already compiled, you can ignore and execute test directly)
+ Compile and Execute
 
-./test //Execute command
+If not yet compiled:
 
-The callback interface can be seen in the execution window to update the temperature and humidity, status value [callback style output]
+```bash
+g++ -std=c++17 -o test /home/pi/main.cpp Delay.cpp DHT11.cpp Key.cpp -lgpiodcxx
+```
 
-3.Control
+To run:
 
-From top to bottom, from left to right, there are eight buttons in total
+```bash
+./test
+```
 
-1-Manual mode
+The terminal will show callback updates for temperature, humidity, and system state.
 
-2and3-Control status switch
+---
 
-4-Automatic mode (in this mode, the switch is judged by temperature and humidity) condition if(tem>20 && hum>40) open. At this time, when the temperature exceeds 27 degrees Celsius, the buzzer sounds and the curtain starts to close automatically.
+3. Keypad Control Overview
 
-5-Clock setting hours (n hours delayed from the current time)
+The matrix keypad has 8 functional buttons arranged top-down, left-right:
 
-6-Clock setting half hours (n half hours delayed from the current time, n>=2 automatically carries to hours)
+| Button No. | Function |
+|------------|----------|
+| ①          | Enter Manual Mode |
+| ②③         | Control curtain open/close (Manual mode only) |
+| ④          | Auto Mode: When temperature > 27°C, buzzer sounds and curtain closes |
+| ⑤          | Set timer hours (add n hours from current time) |
+| ⑥          | Set timer half-hours (add n × 30 min; auto carry to hour if ≥60 min) |
+| ⑦          | Confirm time setting, outputs target time. When reached, buzzer sounds and curtain closes |
+| ⑧          | Turn off buzzer manually |
 
-7-Clock confirmation setting, output the set clock time, and the alarm will sound when the time is up (buzzer sounds)
+---
 
-8-Buzzer off
+ Bluetooth Control
 
-In addition, the temperature is too high and the buzzer is on. Bluetooth sends 0 off, 1 on (hex)
+- Send `01` (hex) → Turn ON buzzer  
+- Send `00` (hex) → Turn OFF buzzer  
+
+> Works via any serial Bluetooth terminal app.
+
+---
+
+ Auto Mode Logic
+
+In auto mode, system decides curtain status based on sensor readings:
+
+```cpp
+if (tem > 20 && hum > 40)
+    open curtain;
+
+if (tem > 27)
+{
+    buzzer on;
+    curtain close;
+}
+```
+
+---
+
+ File Structure
+
+| File         | Description                        |
+|--------------|------------------------------------|
+| `main.cpp`   | Main logic and mode control        |
+| `DHT11.cpp`  | DHT11 temperature/humidity reading |
+| `Key.cpp`    | Matrix keypad scanning             |
+| `Delay.cpp`  | Microsecond/millisecond delays     |
+| `BYJ.cpp`    | Stepper motor control sequence     |
+| `blueth.cpp` | Bluetooth input handling (optional)|
+
+---
 
 
-Here's a link to our presentation and promotional video:  https://youtu.be/zzqQ1Vp2ANM
+
 ![1745175979635](https://github.com/user-attachments/assets/77649bca-f610-4e7a-a673-a43ac6213d58)
 ![1745175943880](https://github.com/user-attachments/assets/57872223-252a-43fc-bc87-5ea963f2a128)
 ![1745175830348](https://github.com/user-attachments/assets/c8e1efec-e4dd-49ef-a84f-3c88dbc6db82)
