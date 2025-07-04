@@ -1,3 +1,0 @@
-/home/pi/project/build/CMakeFiles/sensor_project.dir
-/home/pi/project/build/CMakeFiles/edit_cache.dir
-/home/pi/project/build/CMakeFiles/rebuild_cache.dir
