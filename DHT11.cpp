@@ -243,8 +243,3 @@ int DHT11Sensor::readBit()
 		{
 			break;
 		}
-	}
-	auto end = std::chrono::steady_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-	return (duration.count() > 40) ? 1 : 0;
-}
