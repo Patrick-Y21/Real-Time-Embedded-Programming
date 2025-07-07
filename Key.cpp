@@ -18,3 +18,10 @@ MatrixKeypad::~MatrixKeypad()
 }
 
 bool MatrixKeypad::initialize()
+{
+	try
+	{
+		m_chip = std::make_unique<gpiod::chip>(m_chipName);
+		// Initialize column pins as outputs
+		for (int i = 0; i < 4; ++i)
+		{
