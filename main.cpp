@@ -41,3 +41,4 @@ int main()
 		config.keypadScanInterval = 50;		// 50ms
 		config.tempThreshold = 27;				// 27°C
 		config.humidityThreshold = 40;		// 40%
+
