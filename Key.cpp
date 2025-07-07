@@ -38,3 +38,4 @@ auto line = std::make_unique<gpiod::line>(m_chip->get_line(m_colPins[i]));
 			m_rowLines.push_back(std::move(line));
 		}
 return true;
+}
