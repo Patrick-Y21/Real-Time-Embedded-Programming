@@ -41,3 +41,11 @@ int main()
 		config.keypadScanInterval = 50;		// 50ms
 		config.tempThreshold = 27;				// 27°C
 		config.humidityThreshold = 40;		// 40%
+
+		// Create and initialize system controller
+		g_systemController = std::make_unique<SystemController>(config);
+		if (!g_systemController->initialize())
+		{
+			std::cerr << "[Main] Failed to initialize system controller" << std::endl;
+			return -1;
+		}
