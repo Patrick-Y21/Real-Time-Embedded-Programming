@@ -29,15 +29,4 @@ int main()
 	signal(SIGINT, signalHandler);
 	signal(SIGTERM, signalHandler);
 	try
-	{
-		// System configuration
-		SystemController::SystemConfig config;
-		config.gpioChipName = "gpiochip0";
-		config.dht11Pin = 17;
-		config.buzzerPin = 18;
-		config.keypadCols = {{26, 19, 13, 6}};
-		config.keypadRows = {{21, 20, 16, 12}};
-		config.sensorReadInterval = 2000; // 2 seconds
-		config.keypadScanInterval = 50;		// 50ms
-		config.tempThreshold = 27;				// 27°C
-		config.humidityThreshold = 40;		// 40%
+	
