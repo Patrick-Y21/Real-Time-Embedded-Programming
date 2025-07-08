@@ -37,8 +37,8 @@ auto line = std::make_unique<gpiod::line>(m_chip->get_line(m_colPins[i]));
 			line->request({"keypad_row", gpiod::line_request::DIRECTION_INPUT});
 			m_rowLines.push_back(std::move(line));
 		}
-return true;
-}
+		return true;
+	}
 catch (const std::exception &e)
 	{
 		if (m_errorCallback)
@@ -46,3 +46,22 @@ catch (const std::exception &e)
 			m_errorCallback("Failed to initialize keypad: " + std::string(e.what()));
 		}
 		return false;
+	}
+}
+
+void MatrixKeypad::startScanning(int scanIntervalMs)
+{
+	if (m_scanning.load())
+	{
+		return;
+	}
+	if (m_colLines.empty() || m_rowLines.empty())
+	{
+		if (!initialize())
+		{
+			return;
+		}
+	}
+	m_scanning.store(true);
+	m_scanThread = std::make_unique<std::thread>(&MatrixKeypad::scanningThread, this, scanIntervalMs);
+}
