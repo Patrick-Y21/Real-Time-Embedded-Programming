@@ -39,3 +39,10 @@ auto line = std::make_unique<gpiod::line>(m_chip->get_line(m_colPins[i]));
 		}
 return true;
 }
+catch (const std::exception &e)
+	{
+		if (m_errorCallback)
+		{
+			m_errorCallback("Failed to initialize keypad: " + std::string(e.what()));
+		}
+		return false;
