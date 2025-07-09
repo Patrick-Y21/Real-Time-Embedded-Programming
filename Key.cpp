@@ -82,3 +82,19 @@ MatrixKeypad::KeyData MatrixKeypad::getLastKeyPress() const
 	return m_lastKeyData;
 }
 
+void MatrixKeypad::registerKeyPressCallback(KeyPressCallback callback)
+{
+	m_keyPressCallback = callback;
+}
+
+void MatrixKeypad::registerErrorCallback(ErrorCallback callback)
+{
+	m_errorCallback = callback;
+}
+
+bool MatrixKeypad::isScanning() const
+{
+	return m_scanning.load();
+}
+
+char MatrixKeypad::getKeyChar(int row, int col) const
