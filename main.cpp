@@ -59,3 +59,7 @@ int main()
 			auto sensorData = g_systemController->getLatestSensorData();
 			if (sensorData.isValid)
 			{
+std::cout << "[Main] Status - Temp: " << sensorData.temperature
+									<< "°C, Humidity: " << sensorData.humidity << "%, "
+									<< "Curtain: " << (g_systemController->getCurtainState() == SystemController::CurtainState::OPEN ? "OPEN" : "CLOSED")
+									<< ", Mode: ";
