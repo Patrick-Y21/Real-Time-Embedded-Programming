@@ -76,3 +76,9 @@ void MatrixKeypad::stopScanning()
 	m_scanThread.reset();
 }
 
+MatrixKeypad::KeyData MatrixKeypad::getLastKeyPress() const
+{
+	std::lock_guard<std::mutex> lock(m_dataMutex);
+	return m_lastKeyData;
+}
+
