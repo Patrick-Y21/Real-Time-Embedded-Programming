@@ -65,3 +65,14 @@ void MatrixKeypad::startScanning(int scanIntervalMs)
 	m_scanning.store(true);
 	m_scanThread = std::make_unique<std::thread>(&MatrixKeypad::scanningThread, this, scanIntervalMs);
 }
+
+void MatrixKeypad::stopScanning()
+{
+	m_scanning.store(false);
+	if (m_scanThread && m_scanThread->joinable())
+	{
+		m_scanThread->join();
+	}
+	m_scanThread.reset();
+}
+
