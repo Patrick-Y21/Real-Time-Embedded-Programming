@@ -240,6 +240,4 @@ int DHT11Sensor::readBit()
 	while (m_dataLine->get_value() == 1)
 	{
 		if (std::chrono::steady_clock::now() > timeout)
-		{
-			break;
-		}
+		
