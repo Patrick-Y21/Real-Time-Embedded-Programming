@@ -29,7 +29,7 @@ int main()
 	signal(SIGINT, signalHandler);
 	signal(SIGTERM, signalHandler);
 	try
-{
+	{
 		// System configuration
 		SystemController::SystemConfig config;
 		config.gpioChipName = "gpiochip0";
@@ -59,7 +59,9 @@ int main()
 			auto sensorData = g_systemController->getLatestSensorData();
 			if (sensorData.isValid)
 			{
-std::cout << "[Main] Status - Temp: " << sensorData.temperature
+				std::cout << "[Main] Status - Temp: " << sensorData.temperature
 									<< "°C, Humidity: " << sensorData.humidity << "%, "
 									<< "Curtain: " << (g_systemController->getCurtainState() == SystemController::CurtainState::OPEN ? "OPEN" : "CLOSED")
 									<< ", Mode: ";
+
+				switch (g_systemController->getSystemState())
