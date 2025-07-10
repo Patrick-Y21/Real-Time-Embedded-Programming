@@ -122,3 +122,7 @@ void MatrixKeypad::scanningThread(int scanIntervalMs)
 
 				if (m_keyPressCallback)
 				{
+					m_keyPressCallback(keyData.row, keyData.col, keyData.keyChar);
+				}
+			}
+		}
