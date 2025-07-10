@@ -106,3 +106,19 @@ char MatrixKeypad::getKeyChar(int row, int col) const
 	return '\0';
 }
 
+void MatrixKeypad::scanningThread(int scanIntervalMs)
+{
+	while (m_scanning.load())
+	{
+		try
+		{
+			KeyData keyData = scanMatrix();
+			if (keyData.isPressed && debounceKey(keyData.row, keyData.col))
+			{
+				{
+					std::lock_guard<std::mutex> lock(m_dataMutex);
+					m_lastKeyData = keyData;
+				}
+
+				if (m_keyPressCallback)
+				{
