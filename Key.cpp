@@ -98,3 +98,11 @@ bool MatrixKeypad::isScanning() const
 }
 
 char MatrixKeypad::getKeyChar(int row, int col) const
+{
+	if (row >= 0 && row < 4 && col >= 0 && col < 4)
+	{
+		return KEYPAD_LAYOUT[row][col];
+	}
+	return '\0';
+}
+
