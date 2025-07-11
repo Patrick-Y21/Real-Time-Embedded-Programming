@@ -137,3 +137,7 @@ void MatrixKeypad::scanningThread(int scanIntervalMs)
 	}
 }
 
+MatrixKeypad::KeyData MatrixKeypad::scanMatrix()
+{
+	KeyData keyData = {-1, -1, '\0', std::chrono::steady_clock::now(), false};
+	for (int col = 0; col < 4; ++col)
