@@ -126,3 +126,14 @@ void MatrixKeypad::scanningThread(int scanIntervalMs)
 				}
 			}
 		}
+		catch (const std::exception &e)
+		{
+			if (m_errorCallback)
+			{
+				m_errorCallback("Keypad scanning error: " + std::string(e.what()));
+			}
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(scanIntervalMs));
+	}
+}
+
