@@ -65,3 +65,4 @@ int main()
 									<< ", Mode: ";
 
 				switch (g_systemController->getSystemState())
+				{
