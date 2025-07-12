@@ -67,4 +67,15 @@ int main()
 				switch (g_systemController->getSystemState())
 				{
 				case SystemController::SystemState::MANUAL_MODE:
-
+                                        std::cout << "MANUAL";
+					break;
+				case SystemController::SystemState::AUTO_MODE:
+					std::cout << "AUTO";
+					break;
+				case SystemController::SystemState::ALARM_MODE:
+					std::cout << "ALARM";
+					break;
+				}
+				std::cout << std::endl;
+			}
+	
