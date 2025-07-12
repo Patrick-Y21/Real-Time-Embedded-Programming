@@ -436,4 +436,15 @@ void SystemController::alarmMonitoringThread()
 					std::cout << "[SystemController] Alarm triggered!" << std::endl;
 					setBuzzer(true);
 					m_alarmEnabled = false; // Disable alarm after triggering
-		
+				}
+			}
+		}
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
+}
+
+void SystemController::handleError(const std::string &error)
+{
+	std::cerr << "[SystemController] Error: " << error << std::endl;
+}
+
