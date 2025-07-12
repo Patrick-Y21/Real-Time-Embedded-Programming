@@ -156,3 +156,10 @@ MatrixKeypad::KeyData MatrixKeypad::scanMatrix()
 				keyData.isPressed = true;
 				keyData.timestamp = std::chrono::steady_clock::now();
 				// Wait for key release
+				while (m_rowLines[row]->get_value() == 1)
+				{
+					delay_ms(10);
+				}
+				// Set column to low before returning
+				m_colLines[col]->set_value(0);
+				return keyData;
