@@ -167,3 +167,8 @@ MatrixKeypad::KeyData MatrixKeypad::scanMatrix()
 		}
 		// Set column to low
 		m_colLines[col]->set_value(0);
+	}
+
+	return keyData;
+}
+
