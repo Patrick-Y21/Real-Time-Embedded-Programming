@@ -141,3 +141,18 @@ MatrixKeypad::KeyData MatrixKeypad::scanMatrix()
 {
 	KeyData keyData = {-1, -1, '\0', std::chrono::steady_clock::now(), false};
 	for (int col = 0; col < 4; ++col)
+	{
+		// Set current column high
+		m_colLines[col]->set_value(1);
+		delay_ms(1); // For signal propagation
+		// Check all rows for this column
+		for (int row = 0; row < 4; ++row)
+		{
+			if (m_rowLines[row]->get_value() == 1)
+			{
+				keyData.row = row;
+				keyData.col = col;
+				keyData.keyChar = getKeyChar(row, col);
+				keyData.isPressed = true;
+				keyData.timestamp = std::chrono::steady_clock::now();
+				// Wait for key release
