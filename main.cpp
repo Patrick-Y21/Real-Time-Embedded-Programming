@@ -58,4 +58,13 @@ int main()
 			// Display system status periodically
 			auto sensorData = g_systemController->getLatestSensorData();
 			if (sensorData.isValid)
-			
+			{
+				std::cout << "[Main] Status - Temp: " << sensorData.temperature
+									<< "°C, Humidity: " << sensorData.humidity << "%, "
+									<< "Curtain: " << (g_systemController->getCurtainState() == SystemController::CurtainState::OPEN ? "OPEN" : "CLOSED")
+									<< ", Mode: ";
+
+				switch (g_systemController->getSystemState())
+				{
+				case SystemController::SystemState::MANUAL_MODE:
+
