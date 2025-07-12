@@ -66,3 +66,4 @@ int main()
 
 				switch (g_systemController->getSystemState())
 				{
+				case SystemController::SystemState::MANUAL_MODE:
