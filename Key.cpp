@@ -172,3 +172,11 @@ MatrixKeypad::KeyData MatrixKeypad::scanMatrix()
 	return keyData;
 }
 
+bool MatrixKeypad::debounceKey(int row, int col)
+{
+	// Ensure key is still pressed
+	delay_ms(20);
+	if (row < 0 || row >= 4 || col < 0 || col >= 4)
+	{
+		return false;
+	}
