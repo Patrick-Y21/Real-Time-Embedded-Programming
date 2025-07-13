@@ -180,3 +180,9 @@ bool MatrixKeypad::debounceKey(int row, int col)
 	{
 		return false;
 	}
+	m_colLines[col]->set_value(1);
+	delay_ms(1);
+	bool isPressed = (m_rowLines[row]->get_value() == 1);
+	m_colLines[col]->set_value(0);
+	return isPressed;
+}
