@@ -25,7 +25,7 @@ bool MatrixKeypad::initialize()
 		// Initialize column pins as outputs
 		for (int i = 0; i < 4; ++i)
 		{
-auto line = std::make_unique<gpiod::line>(m_chip->get_line(m_colPins[i]));
+			auto line = std::make_unique<gpiod::line>(m_chip->get_line(m_colPins[i]));
 			line->request({"keypad_col", gpiod::line_request::DIRECTION_OUTPUT, 0});
 			line->set_value(0);
 			m_colLines.push_back(std::move(line));
