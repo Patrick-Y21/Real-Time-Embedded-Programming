@@ -30,7 +30,7 @@ bool MatrixKeypad::initialize()
 			line->set_value(0);
 			m_colLines.push_back(std::move(line));
 		}
-// Initialize row pins as inputs
+		// Initialize row pins as inputs
 		for (int i = 0; i < 4; ++i)
 		{
 			auto line = std::make_unique<gpiod::line>(m_chip->get_line(m_rowPins[i]));
