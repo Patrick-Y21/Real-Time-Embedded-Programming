@@ -39,7 +39,7 @@ bool MatrixKeypad::initialize()
 		}
 		return true;
 	}
-catch (const std::exception &e)
+	catch (const std::exception &e)
 	{
 		if (m_errorCallback)
 		{
