@@ -75,4 +75,20 @@ int main()
 				case SystemController::SystemState::ALARM_MODE:
 					std::cout << "ALARM";
 					break;
-				
+				}
+				std::cout << std::endl;
+			}
+// Sleep to reduce CPU usage
+			std::this_thread::sleep_for(std::chrono::seconds(5));
+		}
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << "[Main] Exception: " << e.what() << std::endl;
+		return -1;
+	}
+
+	std::cout << "[Main] System shutdown complete." << std::endl;
+	return 0;
+}
+
