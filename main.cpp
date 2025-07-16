@@ -75,6 +75,4 @@ int main()
 				case SystemController::SystemState::ALARM_MODE:
 					std::cout << "ALARM";
 					break;
-				}
-				std::cout << std::endl;
-			}
+				
