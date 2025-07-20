@@ -90,6 +90,3 @@ int main()
 
 	std::cout << "[Main] System shutdown complete." << std::endl;
 	return 0;
-}
-
-
