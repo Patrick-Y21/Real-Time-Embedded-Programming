@@ -78,7 +78,7 @@ int main()
 				}
 				std::cout << std::endl;
 			}
-// Sleep to reduce CPU usage
+			// Sleep to reduce CPU usage
 			std::this_thread::sleep_for(std::chrono::seconds(5));
 		}
 	}
@@ -90,3 +90,4 @@ int main()
 
 	std::cout << "[Main] System shutdown complete." << std::endl;
 	return 0;
+}
