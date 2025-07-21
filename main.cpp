@@ -39,7 +39,7 @@ int main()
 		config.keypadRows = {{21, 20, 16, 12}};
 		config.sensorReadInterval = 2000; // 2 seconds
 		config.keypadScanInterval = 50;		// 50ms
-		config.tempThreshold = 27;				// 27°C
+		config.tempThreshold = 27;				// 27掳C
 		config.humidityThreshold = 40;		// 40%
 
 		// Create and initialize system controller
@@ -60,7 +60,7 @@ int main()
 			if (sensorData.isValid)
 			{
 				std::cout << "[Main] Status - Temp: " << sensorData.temperature
-									<< "°C, Humidity: " << sensorData.humidity << "%, "
+									<< "掳C, Humidity: " << sensorData.humidity << "%, "
 									<< "Curtain: " << (g_systemController->getCurtainState() == SystemController::CurtainState::OPEN ? "OPEN" : "CLOSED")
 									<< ", Mode: ";
 
@@ -91,3 +91,4 @@ int main()
 	std::cout << "[Main] System shutdown complete." << std::endl;
 	return 0;
 }
+
