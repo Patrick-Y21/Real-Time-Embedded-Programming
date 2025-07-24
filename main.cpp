@@ -17,7 +17,7 @@ void signalHandler(int signal)
 	{
 		g_systemController->stop();
 	}
-	exit(0);
+	exit(0);1
 }
 
 /**
