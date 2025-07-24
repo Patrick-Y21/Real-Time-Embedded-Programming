@@ -20,11 +20,11 @@ if (GPIOD_LIB AND GPIODCXX_LIB)
     
     # Create executable
     add_executable(smart_curtain_system 
-        src/main.cpp 
-        src/Delay.cpp 
-        src/DHT11.cpp 
-        src/Key.cpp
-        src/SystemController.cpp
+        main.cpp 
+        Delay.cpp 
+        DHT11.cpp 
+        Key.cpp
+        SystemController.cpp
     )
     
     # Link libraries
@@ -48,11 +48,11 @@ endif()
 option(BUILD_TESTS "Build test programs" ON)
 if(BUILD_TESTS)
     add_executable(test_comprehensive
-        test_comprehensive.cpp
-        src/Delay.cpp
-        src/DHT11.cpp
-        src/Key.cpp
-        src/SystemController.cpp
+        test.cpp
+        Delay.cpp
+        DHT11.cpp
+        Key.cpp
+        SystemController.cpp
     )
     
     target_link_libraries(test_comprehensive
