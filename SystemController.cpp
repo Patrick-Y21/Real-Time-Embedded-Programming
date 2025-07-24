@@ -11,7 +11,7 @@ SystemController::SystemController(const SystemConfig &config)
 
 SystemController::~SystemController()
 {
-	stop();1
+	stop();
 }
 
 bool SystemController::initialize()
