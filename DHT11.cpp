@@ -1,4 +1,3 @@
-DHT11.cpp
 #include "DHT11.h"
 #include "Delay.h"
 #include <stdexcept>
