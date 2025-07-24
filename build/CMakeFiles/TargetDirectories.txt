@@ -1,0 +1,4 @@
+/home/cothlory/projects/git/Real-Time-Embedded-Programming/project/build/CMakeFiles/smart_curtain_system.dir
+/home/cothlory/projects/git/Real-Time-Embedded-Programming/project/build/CMakeFiles/test_comprehensive.dir
+/home/cothlory/projects/git/Real-Time-Embedded-Programming/project/build/CMakeFiles/edit_cache.dir
+/home/cothlory/projects/git/Real-Time-Embedded-Programming/project/build/CMakeFiles/rebuild_cache.dir
